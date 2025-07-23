@@ -13,8 +13,14 @@ export class TaskEntity {
     description: string;
 
     @Column()
-    done: boolean;
+    status: TaskStatus;
 
      @ManyToOne(() => UserEntity, user => user.tasks)
   user: UserEntity;
+}
+
+export enum TaskStatus {
+  OPEN = 'OPEN',
+  WIP = 'WIP',
+  DONE = 'DONE',
 }

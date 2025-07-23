@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TaskService } from './tasks.service';
 import { CreateTaskDto } from 'src/DTO/create-task.dto';
 import { UpdateTaskDto } from 'src/DTO/update-task.dto';
+import { TaskStatusValidatorPipe } from 'pipes/TaskStatusValidator.pipe';
+import { TaskStatus } from 'src/entity/task.entity';
 
 @Controller('tasks')
 export class TaskController {
@@ -18,8 +20,8 @@ export class TaskController {
   }
 
   @Patch(':id')
-  updateTask(@Param('id') id: string, @Body() data: UpdateTaskDto) {
-    return this.taskService.updateTask(id, data);
+  updateTask(@Param('id') id: string, @Body('status', TaskStatusValidatorPipe) status: TaskStatus, data: UpdateTaskDto) {
+    return this.taskService.updateTask(id, status, data);
   }
 
   @Delete(':id')
