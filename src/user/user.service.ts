@@ -17,11 +17,10 @@ async getAllUsers() {
 
 async addNewUser(CreateUserDto: CreateUserDto){
     const user = new UserEntity();
-    const { username, email, password, fullname} = CreateUserDto
+    const { username, email, password} = CreateUserDto
     user.username = username;
     user.email = email;
     user.password = password;
-    user.fullname = fullname;
 
 this.repo.create(user);
 return this.repo.save(user);

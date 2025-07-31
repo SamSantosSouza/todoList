@@ -15,6 +15,9 @@ export class UserEntity {
     password: string;
 
     @Column()
+    salt: string;
+
+    @Column()
     fullname: string;
     tasks: any;
 }
